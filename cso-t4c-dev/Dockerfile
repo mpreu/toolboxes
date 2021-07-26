@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/f33/fedora-toolbox:33
+FROM registry.fedoraproject.org/fedora-toolbox:34
 
 ARG BUILD_DATE
 ARG IMAGE_VERSION
@@ -15,7 +15,8 @@ LABEL org.opencontainers.image.created="$BUILD_DATE" \
 WORKDIR /tmp/scripts
 COPY scripts /tmp/scripts/
 
-RUN /tmp/scripts/install \
+RUN dnf update -y \
+    && /tmp/scripts/install \
     && rm -rf /tmp/scripts \
     && dnf clean all
 
