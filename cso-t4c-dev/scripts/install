@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+export OPERATOR_SDK_VERSION="v1.10.0"
+export OCP_CLI_VERSION="stable-4.7"
+
 ./keep-sudo
 ./packages
 ./vscode
@@ -8,3 +11,4 @@ set -e
 ./kubectl
 ./tekton
 ./helm
+./operator-sdk

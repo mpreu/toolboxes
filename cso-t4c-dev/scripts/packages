@@ -3,4 +3,4 @@ set -euo pipefail
 
 echo "Install packages"
 
-dnf install -y make vim openssl httpie golang git git-lfs bind-utils
+dnf install -y make vim openssl openssh-askpass httpie golang git git-lfs bind-utils skopeo buildah libxshmfence
