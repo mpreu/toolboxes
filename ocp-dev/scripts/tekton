@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Install tekton"
+
+# Not available for fedora 35 as of now
+#
+# dnf copr enable -y chmouel/tektoncd-cli
+# dnf install -y tektoncd-cli
+
+rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.21.0/tektoncd-cli-0.21.0_Linux-64bit.rpm

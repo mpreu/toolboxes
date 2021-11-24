@@ -12,8 +12,8 @@ openssh-askpass \
 httpie \
 golang \
 git \
-git-lfs \
 bind-utils \
 skopeo \
 buildah \
-libxshmfence
+libxshmfence \
+jq

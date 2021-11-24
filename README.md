@@ -6,7 +6,7 @@ Images are published in the Github registry and can be used e.g. with:
 
 ```bash
 # Create toolbox from image
-toolbox create --container dev --image ghcr.io/mpreu/toolbox-cso-t4c-dev:latest
+toolbox create --container dev --image ghcr.io/mpreu/toolbox-ocp-dev:latest
 # Enter created toolbox
 toolbox enter dev
 ```
@@ -14,12 +14,13 @@ toolbox enter dev
 ## Available images
 The following images are available:
 
-- `toolbox-cso-t4c-dev`
+- `ocp-dev`
   - Basic development environment with focus on `Kubernetes`, `Red Hat Openshift`, `Go`-based software development
-  - Includes:
+  - Includes e.g.:
     - `kubectl`
-    - `ocp`
+    - `oc`
     - `tekton`
     - `helm`
+    - `skopeo`
     - `go`
     - `vscode`

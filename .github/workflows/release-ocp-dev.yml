@@ -1,0 +1,44 @@
+name: toolbox-ocp-dev-release
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ocp-dev/**'
+env:
+  IMAGE_NAME: toolbox-ocp-dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Compute variables
+        id: vars
+        run: |
+          echo ::set-output name=timestamp::$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo ::set-output name=sha_short::$(git rev-parse --short HEAD)
+
+      - name: Build image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          tags: latest ${{ steps.vars.outputs.sha_short }}
+          oci: true
+          context: ./ocp-dev
+          containerfiles: |
+            ./ocp-dev/Dockerfile
+          build-args: |
+            BUILD_DATE=${{ steps.vars.outputs.timestamp }}
+            IMAGE_VERSION=${{ steps.vars.outputs.sha_short }}
+
+      - name: Push to Github
+        id: push-to-github
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ secrets.GHCR_REPO }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
