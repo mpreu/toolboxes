@@ -9,6 +9,7 @@ export OCP_CLI_VERSION="stable-4.7"
 ./vscode
 ./oc
 ./kubectl
+./k8s-kustomize
 ./tekton
 ./helm
 ./operator-sdk
