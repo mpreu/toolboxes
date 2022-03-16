@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Install packages"
+echo "Deactivate global git-lfs settings"
+git config --system 'fedora.git-lfs.no-modify-config' true
 
+echo "Install packages"
 dnf install -y \
 adobe-source-code-pro-fonts \
 make \
@@ -12,6 +14,7 @@ openssh-askpass \
 httpie \
 golang \
 git \
+git-lfs \
 bind-utils \
 skopeo \
 buildah \

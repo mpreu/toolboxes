@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-export OPERATOR_SDK_VERSION="v1.16.0"
-export OCP_CLI_VERSION="stable-4.7"
+export OPERATOR_SDK_VERSION="v1.18.0"
+export OCP_CLI_VERSION="stable-4.8"
 
 ./keep-sudo
 ./packages
