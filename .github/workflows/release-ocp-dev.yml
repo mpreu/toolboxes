@@ -4,9 +4,9 @@ on:
     branches:
       - main
     paths:
-      - 'ocp-dev/**'
-    schedule:
-      - cron: '00 20 * * 0'
+      - "ocp-dev/**"
+  schedule:
+    - cron: "00 20 * * 0"
 env:
   IMAGE_NAME: toolbox-ocp-dev
 jobs:
