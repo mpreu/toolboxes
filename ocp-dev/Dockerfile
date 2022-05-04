@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:35
+FROM registry.fedoraproject.org/fedora-toolbox:36
 
 ARG BUILD_DATE
 ARG IMAGE_VERSION
@@ -15,7 +15,10 @@ LABEL org.opencontainers.image.created="$BUILD_DATE" \
 WORKDIR /tmp/scripts
 COPY scripts /tmp/scripts/
 
-RUN dnf update -y \
+RUN echo 'zchunk=False' >> /etc/dnf/dnf.conf \
+    && echo 'fastestmirror=True' >> /etc/dnf/dnf.conf \
+    && echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf \
+    && dnf update -y \
     && /tmp/scripts/install \
     && rm -rf /tmp/scripts \
     && dnf clean all

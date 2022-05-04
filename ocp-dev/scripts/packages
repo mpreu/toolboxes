@@ -19,7 +19,9 @@ bind-utils \
 skopeo \
 buildah \
 libxshmfence \
-jq
+jq \
+graphviz \
+java-17-openjdk.x86_64
 
 echo "Install Task"
 sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
