@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+sops_version=3.7.3
+sops_artifact=sops-${sops_version}-1.x86_64.rpm
+sops_url="https://github.com/mozilla/sops/releases/download/v${sops_version}/${sops_artifact}"
+
 echo "Deactivate global git-lfs settings"
 git config --system 'fedora.git-lfs.no-modify-config' true
 
@@ -21,7 +25,9 @@ buildah \
 libxshmfence \
 jq \
 graphviz \
-java-17-openjdk.x86_64
+java-17-openjdk.x86_64 \
+age \
+${sops_url}
 
 echo "Install Task"
 sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
