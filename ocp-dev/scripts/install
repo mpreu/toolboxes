@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-export OPERATOR_SDK_VERSION="v1.26.0"
+export OPERATOR_SDK_VERSION="v1.30.0"
 export OCP_CLI_VERSION="stable-4.11"
 
 ./keep-sudo
