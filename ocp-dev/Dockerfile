@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:38
+FROM registry.fedoraproject.org/fedora-toolbox:39
 
 ARG BUILD_DATE
 ARG IMAGE_VERSION
@@ -18,7 +18,7 @@ COPY scripts /tmp/scripts/
 RUN echo 'zchunk=False' >> /etc/dnf/dnf.conf \
     && echo 'fastestmirror=True' >> /etc/dnf/dnf.conf \
     && echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf \
-    && dnf update -y \
+    # && dnf update -y \
     && /tmp/scripts/install \
     && rm -rf /tmp/scripts \
     && dnf clean all
