@@ -15,6 +15,7 @@ make \
 vim \
 openssl \
 openssh-askpass \
+libsecret \
 httpie \
 golang \
 git \
