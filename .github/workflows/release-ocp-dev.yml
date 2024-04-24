@@ -11,13 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Compute variables
         id: vars
         run: |
-          echo ::set-output name=timestamp::$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo ::set-output name=sha_short::$(git rev-parse --short HEAD)
+          echo "timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Build image
         id: build-image

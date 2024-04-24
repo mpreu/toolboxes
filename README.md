@@ -1,7 +1,9 @@
 # Toolboxes
+
 Pre-configured custom images for the [containers/toolbox](https://github.com/containers/toolbox) project.
 
 ## How to use?
+
 Images are published in the Github registry and can be used e.g. with:
 
 ```bash
@@ -12,6 +14,7 @@ toolbox enter dev
 ```
 
 ## Available images
+
 The following images are available:
 
 - `ocp-dev`
@@ -19,8 +22,6 @@ The following images are available:
   - Includes e.g.:
     - `kubectl`
     - `oc`
-    - `tekton`
-    - `helm`
     - `skopeo`
     - `go`
     - `vscode`

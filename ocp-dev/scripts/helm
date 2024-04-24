@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Install helm"
-
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+# echo "Install helm"
+# curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
