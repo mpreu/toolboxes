@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:40
+FROM registry.fedoraproject.org/fedora-toolbox:41
 
 ARG BUILD_DATE
 ARG IMAGE_VERSION

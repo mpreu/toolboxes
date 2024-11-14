@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sops_version=3.8.1
-sops_artifact=sops-${sops_version}.x86_64.rpm
+sops_version=3.9.1
+sops_artifact=sops-${sops_version}-1.x86_64.rpm
 sops_url="https://github.com/getsops/sops/releases/download/v${sops_version}/${sops_artifact}"
 
 echo "Deactivate global git-lfs settings"

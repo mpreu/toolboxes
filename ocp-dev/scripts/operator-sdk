@@ -12,7 +12,7 @@ curl -LO ${OPERATOR_SDK_DL_URL}/operator-sdk_${OS}_${ARCH}
 chmod +x operator-sdk_${OS}_${ARCH} && sudo mv operator-sdk_${OS}_${ARCH} /usr/local/bin/operator-sdk
 
 echo "Install OPM tooling"
-OPM_VERSION=v1.31.0
+OPM_VERSION=v1.48.0
 OPM_DL_URL=https://github.com/operator-framework/operator-registry/releases/download/${OPM_VERSION}/linux-amd64-opm
 
 curl -LO ${OPM_DL_URL}

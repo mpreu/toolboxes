@@ -10,4 +10,4 @@ rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.35.2/tektoncd-cli-
 
 
 echo "Install PAC"
-rpm -Uvh https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.24.5/tkn-pac-0.24.5_linux-x86_64.rpm
+rpm -Uvh https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.29.0/tkn-pac-0.29.0_linux-x86_64.rpm
