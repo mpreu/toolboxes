@@ -10,6 +10,7 @@ git config --system 'fedora.git-lfs.no-modify-config' true
 
 echo "Install packages"
 dnf install -y \
+zsh \
 adobe-source-code-pro-fonts \
 make \
 vim \
