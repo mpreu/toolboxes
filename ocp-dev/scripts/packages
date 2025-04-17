@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sops_version=3.9.1
+sops_version=3.10.2
 sops_artifact=sops-${sops_version}-1.x86_64.rpm
 sops_url="https://github.com/getsops/sops/releases/download/v${sops_version}/${sops_artifact}"
 
@@ -27,7 +27,6 @@ buildah \
 libxshmfence \
 jq \
 graphviz \
-java-17-openjdk.x86_64 \
 age \
 ${sops_url}
 

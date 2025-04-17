@@ -3,4 +3,4 @@ set -e
 
 echo "Install kustomize"
 
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash -s -- 5.4.1 /usr/local/bin
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash -s -- 5.6.0 /usr/local/bin

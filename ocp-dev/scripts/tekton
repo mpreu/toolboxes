@@ -6,7 +6,7 @@ echo "Install tekton"
 # dnf copr enable -y chmouel/tektoncd-cli
 # dnf install -y tektoncd-cli
 
-rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.35.2/tektoncd-cli-0.35.2_Linux-64bit.rpm
+rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.39.1/tektoncd-cli-0.39.1_Linux-64bit.rpm
 
 
 echo "Install PAC"
