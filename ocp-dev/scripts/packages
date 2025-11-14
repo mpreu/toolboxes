@@ -8,6 +8,10 @@ sops_url="https://github.com/getsops/sops/releases/download/v${sops_version}/${s
 echo "Deactivate global git-lfs settings"
 git config --system 'fedora.git-lfs.no-modify-config' true
 
+echo "Install COPR repositories"
+dnf copr enable -y jdxcode/mise
+dnf copr enable -y @go-sig/golang-rawhide
+
 echo "Install packages"
 dnf install -y \
 zsh \
@@ -27,6 +31,7 @@ buildah \
 libxshmfence \
 jq \
 graphviz \
+mise \
 age \
 ${sops_url}
 
