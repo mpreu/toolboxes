@@ -76,3 +76,13 @@ function opa {
 
 # Install OPA.
 opa
+
+function gh {
+    dnf install -y dnf5-plugins
+    dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+    dnf install -y gh --repo gh-cli
+    dnf update -y gh
+}
+
+# Install GitHub CLI.
+gh
