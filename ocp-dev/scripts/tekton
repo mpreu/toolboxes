@@ -6,8 +6,8 @@ echo "Install tekton"
 # dnf copr enable -y chmouel/tektoncd-cli
 # dnf install -y tektoncd-cli
 
-rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.39.1/tektoncd-cli-0.39.1_Linux-64bit.rpm
+rpm -Uvh https://github.com/tektoncd/cli/releases/download/v0.43.1/tektoncd-cli-0.43.1_Linux-64bit.rpm
 
 
 echo "Install PAC"
-rpm -Uvh https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.29.0/tkn-pac-0.29.0_linux-x86_64.rpm
+rpm -Uvh https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.39.5/tkn-pac-0.39.5_linux-x86_64.rpm

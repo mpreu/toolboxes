@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sops_version=3.10.2
+sops_version=3.12.2
 sops_artifact=sops-${sops_version}-1.x86_64.rpm
 sops_url="https://github.com/getsops/sops/releases/download/v${sops_version}/${sops_artifact}"
 
@@ -37,3 +37,42 @@ ${sops_url}
 
 echo "Install Task"
 sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+function jfrog {
+    # Create and configure the JFrog CLI YUM repository
+    echo "[jfrog-cli]" > jfrog-cli.repo &&
+    echo "name=JFrog CLI" >> jfrog-cli.repo &&
+    echo "baseurl=https://releases.jfrog.io/artifactory/jfrog-rpms" >> jfrog-cli.repo &&
+    echo "enabled=1" >> jfrog-cli.repo &&
+    echo "gpgcheck=1" >> jfrog-cli.repo && 
+
+    # Import GPG keys for verifying packages
+    # Note: Two keys are imported for backward compatibility with older versions
+    rpm --import https://releases.jfrog.io/artifactory/api/v2/repositories/jfrog-rpms/keyPairs/primary/public &&
+    rpm --import https://releases.jfrog.io/artifactory/api/v2/repositories/jfrog-rpms/keyPairs/secondary/public &&
+
+    # Move the repository file to the YUM configuration directory
+    mv jfrog-cli.repo /etc/yum.repos.d/ &&
+
+    # Install the JFrog CLI package
+    dnf install -y jfrog-cli-v2-jf &&
+
+    # Display an introductory message for JFrog CLI
+    jf intro
+}
+
+# Install jfrog CLI.
+jfrog
+
+function opa {
+    curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+    chmod 755 ./opa
+    mv opa /usr/local/bin/opa
+
+    curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64
+    chmod 755 ./regal
+    mv regal /usr/local/bin/regal
+}
+
+# Install OPA.
+opa

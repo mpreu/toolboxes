@@ -2,7 +2,7 @@
 set -e
 
 export OPERATOR_SDK_VERSION="v1.39.2"
-export OCP_CLI_VERSION="stable-4.16"
+export OCP_CLI_VERSION="stable-4.18"
 
 ./keep-sudo
 ./packages
