@@ -1,0 +1,23 @@
+FROM registry.fedoraproject.org/fedora-toolbox:45
+
+ARG BUILD_DATE
+ARG IMAGE_VERSION
+
+LABEL org.opencontainers.image.title="Firefox Toolbox" \
+      org.opencontainers.image.authors="Matthias Preu" \
+      org.opencontainers.image.url="https://github.com/mpreu/toolboxes" \
+      org.opencontainers.image.documentation="https://github.com/mpreu/toolboxes" \
+      org.opencontainers.image.source="https://github.com/mpreu/toolboxes" \
+      org.opencontainers.image.created="$BUILD_DATE" \
+      org.opencontainers.image.version="$IMAGE_VERSION"
+
+COPY build /tmp/scripts/build
+
+RUN echo 'zchunk=False' >> /etc/dnf/dnf.conf \
+    && echo 'fastestmirror=True' >> /etc/dnf/dnf.conf \
+    && echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf \
+    && /tmp/scripts/build \
+    && rm -rf /tmp/scripts \
+    && dnf clean all
+
+CMD /bin/sh

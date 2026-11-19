@@ -1,0 +1,27 @@
+name: Release Firefox toolbox
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "firefox/**"
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-firefox.yml"
+  pull_request:
+    paths:
+      - "firefox/**"
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-firefox.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build-toolbox.yml
+    with:
+      image: toolbox-firefox
+      context: ./firefox
+      containerfile: ./firefox/Containerfile
+    secrets:
+      GHCR_REPO: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_REPO || '' }}
+      GHCR_PAT: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_PAT || '' }}

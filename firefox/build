@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -eu
+
+installFirefox() {
+    local packages="
+        firefox
+        pcsc-tools
+        opensc
+        zsh
+    "
+
+    printf "Install packages:\n"
+    dnf install -y $packages
+}
+
+# Install Distrobox dependencies.
+# https://distrobox.it/posts/distrobox_custom/
+installDistroBoxDeps() {
+    local distroBoxDeps="
+        bc
+        bzip2
+        chpasswd
+        curl
+        diff
+        find
+        findmnt
+        gpg
+        hostname
+        less
+        lsof
+        man
+        mount
+        passwd
+        pigz
+        pinentry
+        ping
+        ps
+        rsync
+        script
+        ssh
+        sudo
+        time
+        tree
+        umount
+        unzip
+        useradd
+        wc
+        wget
+        xauth
+        zip
+    "
+
+    local missingDeps=""
+    for dep in ${distroBoxDeps}; do
+        ! command -v "${dep}" >/dev/null 2>&1 && missingDeps+="${dep} "
+    done
+
+    if [ -n "$missingDeps" ]; then
+        dnf install -y $missingDeps
+    fi
+}
+
+installFirefox
+installDistroBoxDeps
