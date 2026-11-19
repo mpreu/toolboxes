@@ -14,6 +14,20 @@ installFirefox() {
     dnf install -y $packages
 }
 
+installHostSpawn() {
+    local host_spawn_version=v1.6.2
+    local url="https://github.com/1player/host-spawn/releases/download/${host_spawn_version}/host-spawn-x86_64"
+
+    if ! curl -sLfo /tmp/host-spawn "$url"; then
+        printf "Error: Cannot download host-spawn\n"
+        exit 1
+    fi
+    if [ -e /tmp/host-spawn ]; then
+        mv /tmp/host-spawn /usr/bin/
+        chmod +x /usr/bin/host-spawn
+    fi
+}
+
 # Install Distrobox dependencies.
 # https://distrobox.it/posts/distrobox_custom/
 installDistroBoxDeps() {
@@ -63,3 +77,4 @@ installDistroBoxDeps() {
 
 installFirefox
 installDistroBoxDeps
+installHostSpawn
