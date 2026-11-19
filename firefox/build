@@ -6,6 +6,7 @@ installFirefox() {
         firefox
         pcsc-tools
         opensc
+        host-spawn
         zsh
     "
 
