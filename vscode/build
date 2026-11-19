@@ -11,7 +11,6 @@ installVSCode() {
         adobe-source-code-pro-fonts
         openssh-askpass
         libsecret
-        host-spawn
         graphviz
         vim
         zsh
@@ -19,6 +18,20 @@ installVSCode() {
 
     printf "Install packages:\n"
     dnf install -y $packages
+}
+
+installHostSpawn() {
+    local host_spawn_version=v1.6.2
+    local url="https://github.com/1player/host-spawn/releases/download/${host_spawn_version}/host-spawn-x86_64"
+
+    if ! curl -sLfo /tmp/host-spawn "$url"; then
+        printf "Error: Cannot download host-spawn\n"
+        exit 1
+    fi
+    if [ -e /tmp/host-spawn ]; then
+        mv /tmp/host-spawn /usr/bin/
+        chmod +x /usr/bin/host-spawn
+    fi
 }
 
 # Install Distrobox dependencies.
@@ -70,3 +83,4 @@ installDistroBoxDeps() {
 
 installVSCode
 installDistroBoxDeps
+installHostSpawn
