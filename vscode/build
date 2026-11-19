@@ -13,6 +13,7 @@ installVSCode() {
         libsecret
         host-spawn
         graphviz
+        vim
         zsh
     "
 
