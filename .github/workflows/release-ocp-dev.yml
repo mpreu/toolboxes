@@ -1,43 +1,27 @@
-name: toolbox-ocp-dev-release
+name: Release ocp-dev toolbox
+
 on:
   push:
     branches:
       - main
     paths:
       - "ocp-dev/**"
-env:
-  IMAGE_NAME: toolbox-ocp-dev
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-ocp-dev.yml"
+  pull_request:
+    paths:
+      - "ocp-dev/**"
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-ocp-dev.yml"
+  workflow_dispatch:
+
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Compute variables
-        id: vars
-        run: |
-          echo "timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_OUTPUT
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Build image
-        id: build-image
-        uses: redhat-actions/buildah-build@v2
-        with:
-          image: ${{ env.IMAGE_NAME }}
-          tags: latest ${{ steps.vars.outputs.sha_short }}
-          context: ./ocp-dev
-          containerfiles: |
-            ./ocp-dev/Dockerfile
-          build-args: |
-            BUILD_DATE=${{ steps.vars.outputs.timestamp }}
-            IMAGE_VERSION=${{ steps.vars.outputs.sha_short }}
-
-      - name: Push to Github
-        id: push-to-github
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ secrets.GHCR_REPO }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
+    uses: ./.github/workflows/build-toolbox.yml
+    with:
+      image: toolbox-ocp-dev
+      context: ./ocp-dev
+      containerfile: ./ocp-dev/Dockerfile
+    secrets:
+      GHCR_REPO: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_REPO || '' }}
+      GHCR_PAT: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_PAT || '' }}

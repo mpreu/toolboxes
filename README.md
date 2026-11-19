@@ -1,27 +1,21 @@
 # Toolboxes
 
-Pre-configured custom images for the [containers/toolbox](https://github.com/containers/toolbox) project.
+Pre-configured custom images for [distrobox] or [toolbx].
 
 ## How to use?
 
 Images are published in the Github registry and can be used e.g. with:
 
 ```bash
-# Create toolbox from image
-toolbox create --container dev --image ghcr.io/mpreu/toolbox-ocp-dev:latest
-# Enter created toolbox
-toolbox enter dev
+# Toolbx
+toolbox create --container test --image ghcr.io/mpreu/toolbox-ocp-dev:latest
+toolbox enter test
+
+# Distrobox
+distrobox create --name test --image ghcr.io/mpreu/toolbox-ocp-dev:latest
+distrobox enter test
 ```
 
-## Available images
-
-The following images are available:
-
-- `ocp-dev`
-  - Basic development environment with focus on `Kubernetes`, `Red Hat Openshift`, `Go`-based software development
-  - Includes e.g.:
-    - `kubectl`
-    - `oc`
-    - `skopeo`
-    - `go`
-    - `vscode`
+<!-- References -->
+[distrobox]: https://distrobox.it
+[toolbx]: https://containertoolbx.org/

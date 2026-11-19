@@ -1,0 +1,27 @@
+name: Release VS Code toolbox
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "vscode/**"
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-vscode.yml"
+  pull_request:
+    paths:
+      - "vscode/**"
+      - ".github/workflows/build-toolbox.yml"
+      - ".github/workflows/release-vscode.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build-toolbox.yml
+    with:
+      image: toolbox-vscode
+      context: ./vscode
+      containerfile: ./vscode/Containerfile
+    secrets:
+      GHCR_REPO: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_REPO || '' }}
+      GHCR_PAT: ${{ github.ref == 'refs/heads/main' && secrets.GHCR_PAT || '' }}
