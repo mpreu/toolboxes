@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -eu
+
+installVSCode() {
+    printf "Setup VS Code repository:\n"
+    rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+    local packages="
+        code
+        adobe-source-code-pro-fonts
+        openssh-askpass
+        libsecret
+        host-spawn
+        graphviz
+        zsh
+    "
+
+    printf "Install packages:\n"
+    dnf install -y $packages
+}
+
+# Install Distrobox dependencies.
+# https://distrobox.it/posts/distrobox_custom/
+installDistroBoxDeps() {
+    local distroBoxDeps="
+        bc
+        bzip2
+        chpasswd
+        curl
+        diff
+        find
+        findmnt
+        gpg
+        hostname
+        less
+        lsof
+        man
+        mount
+        passwd
+        pigz
+        pinentry
+        ping
+        ps
+        rsync
+        script
+        ssh
+        sudo
+        time
+        tree
+        umount
+        unzip
+        useradd
+        wc
+        wget
+        xauth
+        zip
+    "
+
+    local missingDeps=""
+    for dep in ${distroBoxDeps}; do
+        ! command -v "${dep}" >/dev/null 2>&1 && missingDeps+="${dep} "
+    done
+
+    if [ -n "$missingDeps" ]; then
+        dnf install -y $missingDeps
+    fi
+}
+
+installVSCode
+installDistroBoxDeps
